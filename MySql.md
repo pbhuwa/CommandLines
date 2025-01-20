@@ -72,4 +72,4 @@ You can write two types of comments in MySQL:
 **ALTER TABLE**       — change the selected table\
 **DROP TABLE**        — delete a table\
 **CREATE INDEX**     — create an index (search key for all the info stored)\
-**DROP INDEX**       — delete an index\
+**DROP INDEX**       — delete an index
