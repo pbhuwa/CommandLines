@@ -6,77 +6,88 @@ interaction, review, and repository synchronization.
 
 ###### **SETUP**
 Configuring user information used across all local repositories
+> 📋 Set a name that is identifiable for credit when review version history
+> ```
+> git config --global user.name “[firstname lastname]”
+> ```
 
-```
-git config --global user.name “[firstname lastname]”
-```
-> Set a name that is identifiable for credit when review version history
-```
-git config --global user.email “[valid-email]”
-```
-> Set an email address that will be associated with each history marker
-```
-git config --global color.ui auto
-```
-> Set automatic command line coloring for Git for easy reviewing
+> 📋 Set an email address that will be associated with each history marker
+> ```
+> git config --global user.email “[valid-email]”
+> ```
+
+> 📋 Set automatic command line coloring for Git for easy reviewing
+> ```
+> git config --global color.ui auto
+> ```
 
 ###### **SETUP & INIT**
 Configuring user information, initializing and cloning repositories
-```
-git init
-```
-> Initialize an existing directory as a Git repository
-```
-git clone [url]
-```
-> Retrieve an entire repository from a hosted location via URL
+> 📋 Initialize an existing directory as a Git repository
+> ```
+> git init
+> ```
+
+> 📋 Retrieve an entire repository from a hosted location via URL
+> ```
+> git clone [url]
+> ```
 
 ##### **STAGE & SNAPSHOT**
 Working with snapshots and the Git staging area
-```
-git status
-```
-> Show modified files in working directory, staged for your next commit
-```
-git add [file]
-```
-> Add a file as it looks now to your next commit (stage)
-```
-git reset [file]
-```
-> Unstage a file while retaining the changes in working directory
-```
-git diff
-```
-> diff of what is changed but not staged
-```
-git diff --staged
-```
-> diff of what is staged but not yet commited
-```
-git commit -m “[descriptive message]”
-```
-> commit your staged content as a new commit snapshot
+> 📋 Show modified files in working directory, staged for your next commit
+> ```
+> git status
+> ```
+
+> 📋 Add a file as it looks now to your next commit (stage)
+> ```
+> git add [file]
+> ```
+
+> 📋 Unstage a file while retaining the changes in working directory
+> ```
+> git reset [file]
+> ```
+
+> 📋 diff of what is changed but not staged
+> ```
+> git diff
+> ```
+
+> 📋 diff of what is staged but not yet commited
+> ```
+> git diff --staged
+> ```
+
+> 📋 commit your staged content as a new commit snapshot
+> ```
+> git commit -m “[descriptive message]”
+> ```
 
 ##### **BRANCH & MERGE**
 Isolating work in branches, changing context, and integrating changes
-```
-git branch
-```
-> list your branches. a * will appear next to the currently active branch
-```
-git branch [branch-name]
-```
-> create a new branch at the current commit
-```
-git checkout
-```
-> switch to another branch and check it out into your working directory
-```
-git merge [branch]
-```
-> merge the specified branch’s history into the current one
-```
-git log
-```
-> show all commits in the current branch’s history
+> 📋 List your branches. a * will appear next to the currently active branch
+> ```
+> git branch
+> ```
+
+> 📋 Create a new branch at the current commit
+> ```
+> git branch [branch-name]
+> ```
+
+> 📋 Switch to another branch and check it out into your working directory
+> ```
+> git checkout
+> ```
+
+> 📋 Merge the specified branch’s history into the current one
+> ```
+> git merge [branch]
+> ```
+
+> 📋 Show all commits in the current branch’s history:
+> ```
+> git log
+> ```
