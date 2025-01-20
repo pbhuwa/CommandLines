@@ -177,14 +177,14 @@ Versioning file removes and path changes
 
 Preventing unintentional staging or commiting of files
 
+> Save a file with desired paterns as .gitignore with either direct string
+> matches or wildcard globs.
+>
 > ```
 > logs/
 > *.notes
 > pattern*/
 > ```
->
-> Save a file with desired paterns as .gitignore with either direct string
-> matches or wildcard globs.
 
 > system wide ignore patern for all local repositories
 >
