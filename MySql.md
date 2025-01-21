@@ -74,12 +74,12 @@ You can write two types of comments in MySQL:
 **CREATE INDEX**     — create an index (search key for all the info stored)\
 **DROP INDEX**       — delete an index
 
-##### **Working with Tables**
+#### **Working with Tables**
 Tables are the key element of MySQL databases as they let you store all the information together 
 in organized rows. Each row consists of columns that feature a specified data type. You have plenty 
 of options for customization using the commands below.
 
-###### **Create a New Simple Table**
+##### **Create a New Simple Table**
 Use this command to create a new table:
 ```
  CREATE TABLE [IF NOT EXISTS] table_name(
@@ -100,19 +100,19 @@ CREATE TABLE movies(
  );
 ```
 
-###### **View Tables**
+##### **View Tables**
 Use the next commands to get more information about the tables stored in your database.
 **show tables** — call a list of all tables associated with a database. 
 **DESCRIBE table_name;** — see the columns of your table. 
 **DESCRIBE table_name column_name;** — review the information of the column in your table
 
-###### **Delete a Table**
+##### **Delete a Table**
 To get rid of the table specify the table name in the following command:
 ```
 DROP TABLE tablename;
 ```
 
-Working With Table Columns
+#### **Working With Table Columns**
 Use columns to store alike information that shares the same attribute (e.g. movie director names). 
 Columns are defined by different storage types:
 * **CHAR**
@@ -127,43 +127,43 @@ When designing columns for your database, your goal is to select the optimal len
 wasted space and maximize performance. 
 Below are the key commands for working with tables
 
-###### **Add New Column**
+##### **Add New Column**
 ```
 ALTER TABLE table
 ADD [COLUMN] column_name;
 ```
 
-###### **Delete/Drop a Column**
+##### **Delete/Drop a Column**
 ```
 ALTER TABLE table_name
 DROP [COLUMN] column_name;
 ```
 
-###### **Insert New Row**
+##### **Insert New Row**
 ```
 INSERT INTO table_name (field1, field2, ...) VALUES (value1,
 value2, ...)
 ```
 
-###### **Select Data from The Row**
+##### **Select Data from The Row**
 Specify what kind of information you want to retrieve from a certain row.
 ```
 SELECT value1, value2 FROM field1
 ```
-###### **Add an Additional Selection Clause**
+##### **Add an Additional Selection Clause**
 Include an additional pointer that indicates what type of data do you need.
 ```
 SELECT * FROM movies WHERE budget=’1’;
 SELECT * FROM movies WHERE year=’2020’ AND rating=’9’;
 ```
 
-###### **Delete a Row**
+##### **Delete a Row**
 Use SELECT FROM syntax and WHERE clause to specify what rows to delete.
 ```
 DELETE FROM movies WHERE budget=’1’;
 ```
 
-###### **Update Rows**
+##### **Update Rows**
 Similarly, you can use different clauses to update all or specified rows in your table.
 To update all rows:
 ```
@@ -189,13 +189,13 @@ SET column1 = value1,
 WHERE budget=’5’
 ```
 
-###### **Edit a Column**
+##### **Edit a Column**
 You can alter any existing column with the following snippet:
 ```
 ALTER TABLE movies MODIFY COLUMN number INT(3)
 ```
 
-###### **Sort Entries in a Column**
+##### **Sort Entries in a Column**
 You can sort the data in all columns and rows the same way you do in Excel e.g. alphabetically or
 from ascending to descending value.
 ```
@@ -203,7 +203,7 @@ SELECT * FROM users ORDER BY last_name ASC;
 SELECT * FROM users ORDER BY last_name DESC;
 ```
 
-###### **Search Columns**
+##### **Search Columns**
 Here’s how you can quickly find the information you need using WHERE and LIKE syntax:
 ```
 SELECT * FROM movies WHERE genre LIKE ‘com%’;
@@ -214,27 +214,27 @@ You can also exclude certain items from search with NOT LIKE:
 SELECT * FROM movies WHERE genre NOT LIKE ‘hor%’;
 ```
 
-###### **Select a Range**
+##### **Select a Range**
 Or you can bring up a certain data range using the next command:
 ```
 SELECT * FROM movies WHERE rating BETWEEN 8 AND 10;
 ```
 
-###### **Concentrate Columns**
+##### **Concentrate Columns**
 You can mash-up two or more columns together with CONCAT function:
 ```
 SELECT CONCAT(first_name, ‘ ‘, last_name) AS ‘Name’, dept FROM
 users;
 ```
 
-###### **Data Types**
+#### **Data Types**
 Data types indicate what type of information you can store in a particular column of your table.
 MySQL has three main categories of data types:
 * Numeric
 * Text
 * Date/time
 
-###### **Numeric Data Types**
+##### **Numeric Data Types**
 Unless programmed, the MySQL column display width will not limit the range of values that
 you can store there. Also, without a numeric data type integer, your columns can display width
 incorrectly if you include too wide values. To prevent that you can use the following integers to
@@ -263,7 +263,7 @@ If unsigned, the column will expand to hold the data up till a certain upper bou
 * **FLOAT (M, D)** — record an approximate number with a floating decimal point. The support for FLOAT is removed as of MySQL 8.0.17 and above.
     * Permissible values ranges are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38.
 
-###### **Blob and Text Data Types**
+##### **Blob and Text Data Types**
 **BLOB** binary range enables you to store larger amounts of text data. The maximum length of a
 BLOB is 65,535 (2<sup>16</sup> − 1) bytes. BLOB values are stored using a 2-byte length prefix.
 **NB**: Since text data can get long, always double-check that you do not exceed the maximum
@@ -273,7 +273,7 @@ characters get truncated, you may just receive an error without a warning.
 * **MEDIUMBLOB** — sets the maximum column length at 16,777,215 (2<sup>24</sup> − 1) bytes. MEDIUMBLOB values are stored using a 3-byte length prefix.
 * **LONGBLOB** — sets the maximum column length at 4,294,967,295 or 4GB (2<sup>32</sup> − 1) bytes. LONGBLOB values are stored using a 4-byte length prefix.
 
-> [!NOTE]: 
+> [!NOTE] 
 > The max length will also depend on the maximum packet size that you configure in the client/server protocol, plus available memory.
 
 **TEXT** does the same job but holds values of smaller length. A TEXT column can have a maximum
@@ -284,10 +284,10 @@ multibyte characters. TEXT value is also stored using a 2-byte length prefix.
 * **MEDIUMTEXT** — store a value using a 3-byte length prefix. The maximum supported column length is 16,777,215 (2<sup>24</sup> − 1) characters.
 * **LONGTEXT** — store a value using a 4-byte length prefix. The maximum supported column length is 4,294,967,295 or 4GB (2<sup>32</sup> − 1) characters.
 
-> [!NOTE]: 
+> [!NOTE] 
 > Again, the length cap will also depend on your configured maximum packet size in the client/server protocol and available memory. 
 
-###### **Text Storage Formats**
+##### **Text Storage Formats**
 * **CHAR** — specifies the max number of non-binary characters you can store. The range is from 0 to 255.
 * **VARCHAR** — store variable-length non-binary strings. The maximum number of characters you can store is 65,535 (equal to the max row size).
     * VARCHAR values are stored as a 1-byte or 2-byte length prefix plus data, unlike CHAR values.
@@ -299,7 +299,7 @@ multibyte characters. TEXT value is also stored using a 2-byte length prefix.
 * **ENUM** columns can contain a maximum of 65,535 distinct elements and have > 255 unique element list definitions among its ENUM.
     * SET — another way to store several text values that were chosen from a predefined list of values.
 
-###### **Date and Time Data Types**
+##### **Date and Time Data Types**
 As the name implies, this data type lets you store the time data in different formats.
 * **DATE** — use it for values with a date part only. MySQL displays DATE values in the ‘YYYY-MMDD’ format.
     * Supported data range is ‘1000-01-01’ to ‘9999-12-31’.
@@ -313,14 +313,14 @@ As the name implies, this data type lets you store the time data in different fo
     * A 4-digit format displays YEAR values as 0000, with a range between 1901 to 2155.
     * A 2-digit format displays YEAR values as 00. The accepted range is ‘0’ to ‘99’ and MySQL will convert YEAR values in the ranges 2000 to 2069 and 1970 to 1999
 
-###### **Working With Indexes**
+#### **Working With Indexes**
 **Indexes** are the core element of your database navigation. Use them to map the different types of
 data in your database, so that you don’t need to parse all the records to find a match.
 
 **NB**: You have to update an index every time you are creating, changing or deleting a record in the
 table. Thus, it’s best to create indexes only when you need to and for frequently searched columns.
 
-###### **How to Create an Index**
+##### **How to Create an Index**
 The basic syntax is as follows:
 ```
 CREATE INDEX index_name
@@ -333,7 +333,7 @@ CREATE UNIQUE INDEX index_name
 ON table_name(index_column_1,index_column_2,...);
 ```
 
-###### **How to Delete an Index in MySQL**
+##### **How to Delete an Index in MySQL**
 Use the DROP command for that:
 ```
 DROP INDEX index_name;
@@ -347,7 +347,7 @@ It features rows and columns, just like the real deal and can contain fields fro
 real tables from your database. In short, it’s a good way to visualize and review data coming from
 different tables within a single screen.
 
-###### **How to Create a New View**
+##### **How to Create a New View**
 ```
 CREATE VIEW view_name AS
 SELECT column1, column2, ...
