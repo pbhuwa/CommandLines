@@ -339,7 +339,7 @@ Use the DROP command for that:
 DROP INDEX index_name;
 ```
 
-##### **Working with Views**
+#### **Working with Views**
 A **view** is a virtual representation of an actual table that you can assemble up to your liking (before
 adding the actual one to your database).
 
