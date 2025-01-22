@@ -126,7 +126,7 @@ composer require meilisearch/meilisearch-php
 
 ### Step 2: Configure MeiliSearch
 Add MeiliSearch configuration to your `.env` file:
-```env
+```
 MEILISEARCH_HOST=http://127.0.0.1:7700
 ```
 
