@@ -354,3 +354,186 @@ SELECT column1, column2, ...
 FROM table_name
 WHERE condition;
 ```
+
+##### **Update a View**
+A view always displays fresh data since the database engine recreates it each time, using the view’s
+SQL statement. To refresh your view use the next code:
+
+```
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+```
+
+##### **Rename a View**
+If you are dealing with multiple views at a time, it’s best to give them distinctive names. Here’s how
+that done:
+
+```
+RENAME TABLE view_name TO new_view_name;
+```
+
+##### **Show All Views**
+To call up all current views for all tables from the database, use this snippet:
+```
+SHOW FULL TABLES
+WHERE table_type = ‘VIEW’;
+```
+
+##### **Delete a View**
+To delete a single view use the DROP command:
+```
+DROP VIEW [IF EXISTS] view_name;
+```
+You can also delete multiple views at a time:
+```
+Drop Multiple views: DROP VIEW [IF EXISTS] view1, view2, ...;
+```
+
+#### **Working With Triggers**
+A **trigger** is a database object, associated with a table. It activates whenever a specific event
+happens for the table.
+For example, you can set up triggers for events such as:
+* Row or deletes updates
+* Row information inserts
+This is a more advanced topic, so check the official MySQL trigger FAQ section for more details.
+
+##### **How to Create a Trigger**
+To create a simple trigger that will pop up before or after a certain operation such as INSERT,
+UPDATE or DELETE, use this code:
+```
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE| DELETE }
+ON table_name FOR EACH ROW
+trigger_body;
+```
+
+##### **Review All Triggers in Your Database**
+Search your database for all the active triggers using LIKE and WHERE clauses.
+```
+SHOW TRIGGERS
+[{FROM | IN} database_name]
+[LIKE ‘pattern’ | WHERE search_condition];
+```
+
+##### **How to Delete a Trigger**
+To remove a trigger, use the DROP command:
+```
+DROP TRIGGER [IF EXISTS] trigger_name;
+```
+
+#### **Stored Procedures for MySQL**
+**Stored procedures** are reusable SQL code snippets that you can store in your database and useas-needed over and over again. They save you tons of time since you don’t need to write a query
+from scratch. Instead, you just call it to execute it.
+
+##### **How to Create a Stored Procedure in MySQL**
+Here’s how to create a simple stored procedure with no additional parameters:
+```
+CREATE PROCEDURE procedure_name
+AS
+sql_statement
+GO;
+```
+And here’s another stored procedure example featuring WHERE clause:
+```
+CREATE PROCEDURE SelectAllMovies @Title varchar(30)
+AS
+SELECT * FROM Movies WHERE Title = @Title
+GO;
+```
+
+##### **Review All Stored Procedures**
+Similarly to triggers, you can review all stored procedures with LIKE and WHERE:
+```
+SHOW PROCEDURE STATUS
+[LIKE ‘pattern’ | WHERE search_condition];
+```
+
+##### **How to Delete a Stored Procedure**
+To get rid of a stored procedure you no longer need, use DROP:
+```
+DROP PROCEDURE [IF EXISTS] procedure_name;
+```
+
+#### **Logical Operators**
+**Logical operators** enable you to add more than one condition in WHERE clause. This makes them
+super handy for more advanced search, update, insert and delete queries.
+In MySQL you have three main logical operators:
+* AND — use it to filter records that rely on 1+ condition. This way you can call records that satisfy all the conditions separated by AND.
+* OR — call records that meet any of the conditions separated by OR.
+* NOT — review records that do not meet a certain condition (e.g. NOT blue). It’s a handy operator from excluding certain data.
+
+Plus, some additional special operators:
+* BETWEEN — select or search data between a range of set min and max values.
+* LIKE — compare one record to another. Handy operator for search.
+* IS NULL — compare some value with a NULL value.
+* IN — determine if a value or expression matches one of the values on your list.
+* ALL — compare a value or expression to all other values in a list.
+* ANY — compare a value or expression to any value in your list according to the specified condition.
+* EXISTS — test if a certain record exists.
+
+#### **Aggregate Functions**
+**Aggregate functions** in MySQL allow you to run a calculation on a set of values and return a single
+scalar value. In essence, they are a great way to find the needed data faster and organize it better
+using **GROUP BY** and **HAVING** clauses of the **SELECT** statement.
+Below is an overview of these:
+
+##### **MIN**
+Find the smallest value of the selected column in your table:
+```
+SELECT MIN (column_name)
+FROM table_name
+WHERE condition;
+```
+
+##### **MAX**
+Does the opposite and returns the largest value of the selected column:
+```
+SELECT MAX (column_name)
+FROM table_name
+WHERE condition;
+```
+
+##### **COUNT**
+Call up several rows that meet the specified criteria:
+```
+SELECT COUNT (column_name)
+FROM table_name
+WHERE condition;
+```
+
+##### **AVG**
+Get the average value of a numeric column that you selected:
+```
+SELECT AVG (column_name)
+FROM table_name
+WHERE condition;
+```
+
+##### **SUM**
+Receive a total sum of a numeric column that you selected:
+```
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+```
+
+#### **SQL Database Backup Commands**
+Finally, don’t forget to regularly backup your progress as you are testing different commands and
+code snippets.
+There are several easy ways to do it. To backup your database to SQL file, use this code:
+```
+mysqldump -u Username -p dbNameYouWant > databasename_backup.sql
+```
+Then, to restore your work from a SQL backup, run the following line:
+```
+mysql - u Username -p dbNameYouWant < databasename_backup.sql
+
+```
+
+#### **SQL import Command**
+To import the database, you can run the following command:
+```
+SOURCE C:\Users\UserName\Downloads\dbName.sql
+```
