@@ -1,353 +1,481 @@
-#### **Getting Started**
+```markdown
+# MySQL Guide
+
+## Table of Contents
+1. [Getting Started](#getting-started)
+2. [How to Connect to MySQL](#how-to-connect-to-mysql)
+3. [Create a New MySQL User Account](#create-a-new-mysql-user-account)
+4. [Create a New Database](#create-a-new-database)
+5. [Delete a MySQL Database](#delete-a-mysql-database)
+6. [Essential MySQL Commands](#essential-mysql-commands)
+7. [Working with Tables](#working-with-tables)
+   - [Create a New Simple Table](#create-a-new-simple-table)
+   - [View Tables](#view-tables)
+   - [Delete a Table](#delete-a-table)
+8. [Working with Table Columns](#working-with-table-columns)
+   - [Add New Column](#add-new-column)
+   - [Delete/Drop a Column](#delete-drop-a-column)
+   - [Insert New Row](#insert-new-row)
+   - [Select Data from The Row](#select-data-from-the-row)
+   - [Add an Additional Selection Clause](#add-an-additional-selection-clause)
+   - [Delete a Row](#delete-a-row)
+   - [Update Rows](#update-rows)
+   - [Edit a Column](#edit-a-column)
+   - [Sort Entries in a Column](#sort-entries-in-a-column)
+   - [Search Columns](#search-columns)
+   - [Select a Range](#select-a-range)
+   - [Concatenate Columns](#concatenate-columns)
+9. [Introduction to Data Types](#introduction-to-data-types)
+10. [Numeric Data Types](#numeric-data-types)
+   - [BIT](#bit)
+   - [ZEROFILL](#zerofill)
+   - [Integer Types](#integer-types)
+   - [Floating-Point Types](#floating-point-types)
+11. [BLOB and TEXT Data Types](#blob-and-text-data-types)
+   - [BLOB Data Types](#blob-data-types)
+   - [TEXT Data Types](#text-data-types)
+   - [Text Storage Formats](#text-storage-formats)
+12. [Date and Time Data Types](#date-and-time-data-types)
+13. [Working With Indexes](#working-with-indexes)  
+   - [What are Indexes?](#what-are-indexes)  
+   - [How to Create an Index](#how-to-create-an-index)  
+   - [How to Delete an Index](#how-to-delete-an-index)  
+14. [Working With Views](#working-with-views)  
+   - [What are Views?](#what-are-views)  
+   - [How to Create a New View](#how-to-create-a-new-view)  
+   - [How to Update a View](#how-to-update-a-view)  
+   - [How to Rename a View](#how-to-rename-a-view)  
+   - [How to Show All Views](#how-to-show-all-views)  
+   - [How to Delete a View](#how-to-delete-a-view)  
+15. [Working With Triggers](#working-with-triggers)  
+   - [What are Triggers?](#what-are-triggers)  
+   - [How to Create a Trigger](#how-to-create-a-trigger)  
+   - [How to Review Triggers](#how-to-review-triggers)  
+   - [How to Delete a Trigger](#how-to-delete-a-trigger)  
+16. [Stored Procedures for MySQL](#stored-procedures-for-mysql)  
+   - [What are Stored Procedures?](#what-are-stored-procedures)  
+   - [How to Create a Stored Procedure](#how-to-create-a-stored-procedure)  
+   - [How to Review Stored Procedures](#how-to-review-stored-procedures)  
+   - [How to Delete a Stored Procedure](#how-to-delete-a-stored-procedure)  
+17. [Logical Operators](#logical-operators)  
+   - [Overview of Logical Operators](#overview-of-logical-operators)  
+   - [Special Operators](#special-operators)  
+18. [Aggregate Functions](#aggregate-functions)  
+   - [Overview](#overview)  
+   - [MIN Function](#min-function)  
+   - [MAX Function](#max-function)  
+   - [COUNT Function](#count-function)  
+   - [AVG Function](#avg-function)  
+   - [SUM Function](#sum-function)  
+19. [SQL Database Backup and Restore Commands](#sql-database-backup-and-restore-commands)  
+   - [Backup Commands](#backup-commands)  
+   - [Restore Commands](#restore-commands)  
+   - [Import Database Command](#import-database-command)  
+20. [Additional MySQL Commands](#additional-mysql-commands)  
+---
+
+## Getting Started
 You can write two types of comments in MySQL:
-> 💬 **Single-Line Comments:**
-> These start with “–”. Any text that goes after the dash and till the end
-> of the line will not be taken into account by the compiler.
-> Example:
-> ```
-> -Update all:
-> SELECT * FROM Movies;
-> ```
 
-> 💬 **Multi-Line Comments:**
-> These start with /_ and end with _/. Again, any text that is beyond the
-> slashes lines will be ignored by the compiler.
-> Example:
-> ```
-> /*Select all the columns
-> of all the records
-> in the Movies table:*/
-> SELECT * FROM Movies;
-> ```
+> 💬 **Single-Line Comments:**  
+These start with “–”. Any text that goes after the dash and till the end of the line will not be taken into account by the compiler.  
+Example:
+```
+-- Update all:
+SELECT * FROM Movies;
+```
 
-#### **How to Connect to MySQL**
-> To start working with MySQL, you’ll need to establish an active SSH session on your server.
-> ```
-> mysql -u root -p
-> ```
-> If you didn’t set a password for your MySQL root user, you omit the -p switch.
+> 💬 **Multi-Line Comments:**  
+These start with `/*` and end with `*/`. Any text that is beyond the slashes lines will be ignored by the compiler.  
+Example:
+```
+/* Select all the columns
+of all the records
+in the Movies table: */
+SELECT * FROM Movies;
+```
 
-#### **Create a new MySQL User Account**
-> Next, you can create a new test user for practice. To do that, run the following command:
-> ```
-> CREATE USER ‘username’@’localhost’ IDENTIFIED BY ‘password’;
-> ```
+---
 
-> If you need to delete a user later on you, use this command:
-> ```
-> DROP USER ‘someuser’@’localhost’;
-> ```
+## How to Connect to MySQL
+To start working with MySQL, you’ll need to establish an active SSH session on your server.
+```
+mysql -u root -p
+```
+If you didn’t set a password for your MySQL root user, you omit the `-p` switch.
 
-#### **Create a New Database**
-> To set up a new database use this line:
-> ```
-> CREATE DATABASE DbName
-> ```
+---
 
-> You can then view all your databases with this command:
-> ```
-> SHOW databases;
-> ```
+## Create a New MySQL User Account
+Next, you can create a new test user for practice. To do that, run the following command:
+```
+CREATE USER ‘username’@’localhost’ IDENTIFIED BY ‘password’;
+```
 
-> Later on, you can quickly navigate to a particular database using this command:
-> ```
-> mysql -u root -p mydatabase < DbName.sql
-> ```
+If you need to delete a user later on you, use this command:
+```
+DROP USER ‘someuser’@’localhost’;
+```
 
-#### **Delete a MySQL Database**
-> To get rid of a database just type:
-> ```
-> DROP DATABASE dbName
-> ```
-> If you are done for the day, just type “exit” in the command line to finish your session.
+---
 
-#### **Essential MySQL Commands**
-**SELECT**            — choose specific data from your database\
-**UPDATE**            — update data in your database\
-**DELETE**            — deletes data from your database\
-**INSERT INTO**       — inserts new data into a database\
-**CREATE DATABASE**   — generate a new database\
-**ALTER DATABASE**    — modify an existing database\
-**CREATE TABLE**      — create a new table in a database\
-**ALTER TABLE**       — change the selected table\
-**DROP TABLE**        — delete a table\
-**CREATE INDEX**     — create an index (search key for all the info stored)\
-**DROP INDEX**       — delete an index
+## Create a New Database
+To set up a new database, use this line:
+```
+CREATE DATABASE DbName;
+```
 
-#### **Working with Tables**
-Tables are the key element of MySQL databases as they let you store all the information together 
-in organized rows. Each row consists of columns that feature a specified data type. You have plenty 
-of options for customization using the commands below.
+You can then view all your databases with this command:
+```
+SHOW databases;
+```
 
-##### **Create a New Simple Table**
+Later on, you can quickly navigate to a particular database using this command:
+```
+mysql -u root -p mydatabase < DbName.sql
+```
+
+---
+
+## Delete a MySQL Database
+To get rid of a database, just type:
+```
+DROP DATABASE dbName;
+```
+
+If you are done for the day, just type “exit” in the command line to finish your session.
+
+---
+
+## Essential MySQL Commands
+- **SELECT** — choose specific data from your database
+- **UPDATE** — update data in your database
+- **DELETE** — deletes data from your database
+- **INSERT INTO** — inserts new data into a database
+- **CREATE DATABASE** — generate a new database
+- **ALTER DATABASE** — modify an existing database
+- **CREATE TABLE** — create a new table in a database
+- **ALTER TABLE** — change the selected table
+- **DROP TABLE** — delete a table
+- **CREATE INDEX** — create an index (search key for all the info stored)
+- **DROP INDEX** — delete an index
+
+---
+
+## Working with Tables
+Tables are the key element of MySQL databases as they let you store all the information together in organized rows. Each row consists of columns that feature a specified data type. You have plenty of options for customization using the commands below.
+
+### Create a New Simple Table
 Use this command to create a new table:
 ```
- CREATE TABLE [IF NOT EXISTS] table_name(
+CREATE TABLE [IF NOT EXISTS] table_name(
   column_list
- )
+);
 ```
 
-The code snippet below features a table for a list of movies that we want to organize by different 
-attributes:
-
+The code snippet below features a table for a list of movies that we want to organize by different attributes:
 ```
 CREATE TABLE movies(
    title VARCHAR(100),
    year VARCHAR(100),
    director VARCHAR(50),
    genre VARCHAR(20),
-   rating VARCHAR(100),
- );
+   rating VARCHAR(100)
+);
 ```
 
-##### **View Tables**
+### View Tables
 Use the next commands to get more information about the tables stored in your database.
-**show tables** — call a list of all tables associated with a database. 
-**DESCRIBE table_name;** — see the columns of your table. 
-**DESCRIBE table_name column_name;** — review the information of the column in your table
+- `show tables` — call a list of all tables associated with a database.
+- `DESCRIBE table_name;` — see the columns of your table.
+- `DESCRIBE table_name column_name;` — review the information of the column in your table.
 
-##### **Delete a Table**
-To get rid of the table specify the table name in the following command:
+### Delete a Table
+To get rid of the table, specify the table name in the following command:
 ```
 DROP TABLE tablename;
 ```
+```
 
-#### **Working With Table Columns**
-Use columns to store alike information that shares the same attribute (e.g. movie director names). 
+```markdown
+## Working With Table Columns
+Use columns to store alike information that shares the same attribute (e.g., movie director names).  
 Columns are defined by different storage types:
-* **CHAR**
-* **VARCHAR**
-* **TEXT**
-* **BLOB**
-* **EUT**
-* **And others.**
+- **CHAR**
+- **VARCHAR**
+- **TEXT**
+- **BLOB**
+- **ENUM**
+- **And others.**
+
 An in-depth overview comes in the next section!
 
-When designing columns for your database, your goal is to select the optimal length to avoid 
-wasted space and maximize performance. 
-Below are the key commands for working with tables
+When designing columns for your database, your goal is to select the optimal length to avoid wasted space and maximize performance. Below are the key commands for working with tables.
 
-##### **Add New Column**
+### Add New Column
 ```
 ALTER TABLE table
 ADD [COLUMN] column_name;
 ```
 
-##### **Delete/Drop a Column**
+### Delete/Drop a Column
 ```
 ALTER TABLE table_name
 DROP [COLUMN] column_name;
 ```
 
-##### **Insert New Row**
+### Insert New Row
 ```
-INSERT INTO table_name (field1, field2, ...) VALUES (value1,
-value2, ...)
+INSERT INTO table_name (field1, field2, ...) 
+VALUES (value1, value2, ...);
 ```
 
-##### **Select Data from The Row**
+### Select Data from The Row
 Specify what kind of information you want to retrieve from a certain row.
 ```
-SELECT value1, value2 FROM field1
-```
-##### **Add an Additional Selection Clause**
-Include an additional pointer that indicates what type of data do you need.
-```
-SELECT * FROM movies WHERE budget=’1’;
-SELECT * FROM movies WHERE year=’2020’ AND rating=’9’;
+SELECT value1, value2 
+FROM field1;
 ```
 
-##### **Delete a Row**
-Use SELECT FROM syntax and WHERE clause to specify what rows to delete.
+### Add an Additional Selection Clause
+Include an additional pointer that indicates what type of data you need.
 ```
-DELETE FROM movies WHERE budget=’1’;
+SELECT * 
+FROM movies 
+WHERE budget='1';
+
+SELECT * 
+FROM movies 
+WHERE year='2020' AND rating='9';
 ```
 
-##### **Update Rows**
-Similarly, you can use different clauses to update all or specified rows in your table.
+### Delete a Row
+Use `DELETE FROM` syntax and `WHERE` clause to specify which rows to delete.
+```
+DELETE FROM movies 
+WHERE budget='1';
+```
+
+### Update Rows
+You can update all or specified rows in your table using the following commands:
+
 To update all rows:
 ```
 UPDATE table_name
 SET column1 = value1,
- ...;
+    ...;
 ```
 
-To update data only in a specified set of rows you can use WHERE clause:
+To update data only in a specified set of rows, you can use the `WHERE` clause:
 ```
 UPDATE table_name
-SET column_1 = value_1,
-WHERE budget=’5’
+SET column_1 = value_1
+WHERE budget='5';
 ```
 
-You can also update, select or delete rows using JOIN clause. It comes particularly handy when you
-need to manipulate data from multiple tables in a single query.
-Here’s how to update rows with JOIN:
+You can also update, select, or delete rows using the `JOIN` clause. It’s especially useful when you need to manipulate data from multiple tables in a single query. Here’s how to update rows with `JOIN`:
 ```
 UPDATE table_name
 INNER JOIN table1 ON table1.column1 = table2.column2
-SET column1 = value1,
-WHERE budget=’5’
+SET column1 = value1
+WHERE budget='5';
 ```
 
-##### **Edit a Column**
+### Edit a Column
 You can alter any existing column with the following snippet:
 ```
-ALTER TABLE movies MODIFY COLUMN number INT(3)
+ALTER TABLE movies 
+MODIFY COLUMN number INT(3);
 ```
 
-##### **Sort Entries in a Column**
-You can sort the data in all columns and rows the same way you do in Excel e.g. alphabetically or
-from ascending to descending value.
+### Sort Entries in a Column
+You can sort the data in all columns and rows the same way you do in Excel, e.g., alphabetically or from ascending to descending value:
 ```
-SELECT * FROM users ORDER BY last_name ASC;
-SELECT * FROM users ORDER BY last_name DESC;
+SELECT * 
+FROM users 
+ORDER BY last_name ASC;
+
+SELECT * 
+FROM users 
+ORDER BY last_name DESC;
 ```
 
-##### **Search Columns**
-Here’s how you can quickly find the information you need using WHERE and LIKE syntax:
+### Search Columns
+Here’s how you can quickly find the information you need using `WHERE` and `LIKE` syntax:
 ```
-SELECT * FROM movies WHERE genre LIKE ‘com%’;
-SELECT * FROM movies WHERE title LIKE ‘%a’;
+SELECT * 
+FROM movies 
+WHERE genre LIKE 'com%';
+
+SELECT * 
+FROM movies 
+WHERE title LIKE '%a';
 ```
-You can also exclude certain items from search with NOT LIKE:
+You can also exclude certain items from the search with `NOT LIKE`:
 ```
-SELECT * FROM movies WHERE genre NOT LIKE ‘hor%’;
+SELECT * 
+FROM movies 
+WHERE genre NOT LIKE 'hor%';
 ```
 
-##### **Select a Range**
-Or you can bring up a certain data range using the next command:
+### Select a Range
+You can bring up a certain data range using the next command:
 ```
-SELECT * FROM movies WHERE rating BETWEEN 8 AND 10;
-```
-
-##### **Concentrate Columns**
-You can mash-up two or more columns together with CONCAT function:
-```
-SELECT CONCAT(first_name, ‘ ‘, last_name) AS ‘Name’, dept FROM
-users;
+SELECT * 
+FROM movies 
+WHERE rating BETWEEN 8 AND 10;
 ```
 
-#### **Data Types**
-Data types indicate what type of information you can store in a particular column of your table.
+### Concatenate Columns
+You can merge two or more columns together with the `CONCAT` function:
+```
+SELECT CONCAT(first_name, ' ', last_name) AS 'Name', dept 
+FROM users;
+```
+## Introduction to Data Types
+Data types indicate what type of information you can store in a particular column of your table.  
 MySQL has three main categories of data types:
-* Numeric
-* Text
-* Date/time
+- **Numeric**
+- **Text**
+- **Date/Time**
 
-##### **Numeric Data Types**
-Unless programmed, the MySQL column display width will not limit the range of values that
-you can store there. Also, without a numeric data type integer, your columns can display width
-incorrectly if you include too wide values. To prevent that you can use the following integers to
-specify the maximum allowed range of values. You can either:
+---
 
-* Assign a specific numeric value to the column
-* Or leave an **unsigned** value.
+## Numeric Data Types
 
-If unsigned, the column will expand to hold the data up till a certain upper boundary range
-* **BIT[(M)]** — specify a bit-value type. **M** stands for the number of bits per value, ranging from 1 to 64. The default is 1 if no T specified.
-* **ZEROFILL** — auto-add UNSIGNED attribute to the column. Deprecated since the MySQL 8.0.17 version.
-* **TINYINT(M)** — the smallest integer with a range of -128 to 127.
-    * **TINYINT(M) [UNSIGNED]** — the range is 0 to 255.
-    * **BOOL, BOOLEAN** — synonyms for TINYINT(1)
-* **SMALLINT(M)** — small integer with a range of -32768 and 32767.
-    * **SMALLINT(M) [UNSIGNED]** — the range is 0 to 65535.
-* **MEDIUMINT(M)** — medium integer with a range of -8388608 to 8388607.
-    * **MEDIUMINT(M) [UNSIGNED]** — the range is 0 to 16777215.
-* **INT(M) and INTEGER (M)** — normal range integer with a range of -2147483648 to 2147483647.
-    * **INT(M)[UNSIGNED] and INTEGER (M)[UNSIGNED]** — the range is 0 to 4294967295.
-* **BIGINT(M)** — the largest integer with a range of -9223372036854775808 to 9223372036854775807.
-    * **BIGINT(M) [UNSIGNED]** — the range is 0 to 8446744073709551615.
-* **DECIMAL (M, D)** — store a double value as a string. **M** specifies the total number of digits. **D** stands for the number of digits after the decimal point. Handy for storing currency values.
-    * Max number of M is 65. If omitted, the default M value is 10.
-    * Max number of D is 30. If omitted, the default D is 0.
-* **FLOAT (M, D)** — record an approximate number with a floating decimal point. The support for FLOAT is removed as of MySQL 8.0.17 and above.
-    * Permissible values ranges are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38.
+### BIT
+- **BIT[(M)]**: Specifies a bit-value type.  
+  - **M**: Number of bits per value (range: 1–64).  
+  - Default: **M = 1** if not specified.
 
-##### **Blob and Text Data Types**
-**BLOB** binary range enables you to store larger amounts of text data. The maximum length of a
-BLOB is 65,535 (2<sup>16</sup> − 1) bytes. BLOB values are stored using a 2-byte length prefix.
-**NB**: Since text data can get long, always double-check that you do not exceed the maximum
-lengths. The system will typically generate a warning if you go beyond the limit. But if nonspace
-characters get truncated, you may just receive an error without a warning.
-* **TINYBLOB** — sets the maximum column length at 255 (2<sup>8</sup>− 1) bytes. TINYBLOB values are stored using a 1-byte length prefix.
-* **MEDIUMBLOB** — sets the maximum column length at 16,777,215 (2<sup>24</sup> − 1) bytes. MEDIUMBLOB values are stored using a 3-byte length prefix.
-* **LONGBLOB** — sets the maximum column length at 4,294,967,295 or 4GB (2<sup>32</sup> − 1) bytes. LONGBLOB values are stored using a 4-byte length prefix.
+### ZEROFILL
+- Automatically adds the **UNSIGNED** attribute to a column.  
+- **Deprecated** since MySQL 8.0.17.
 
-> [!NOTE] 
-> The max length will also depend on the maximum packet size that you configure in the client/server protocol, plus available memory.
+### Integer Types
+- **TINYINT(M)**: Smallest integer.  
+  - Range: -128 to 127.  
+  - **UNSIGNED**: Range: 0 to 255.  
+  - **BOOL**/**BOOLEAN**: Synonyms for **TINYINT(1)**.
+  
+- **SMALLINT(M)**: Small integer.  
+  - Range: -32,768 to 32,767.  
+  - **UNSIGNED**: Range: 0 to 65,535.
 
-**TEXT** does the same job but holds values of smaller length. A TEXT column can have a maximum
-length of **65,535 (2<sup>16</sup> − 1) characters**. However, the max length can be smaller if the value contains
-multibyte characters. TEXT value is also stored using a 2-byte length prefix.
+- **MEDIUMINT(M)**: Medium integer.  
+  - Range: -8,388,608 to 8,388,607.  
+  - **UNSIGNED**: Range: 0 to 16,777,215.
 
-* **TINYTEXT** — store a value using a 1-byte length prefix. The maximum supported column length is 255 (2<sup>8</sup>− 1) characters.
-* **MEDIUMTEXT** — store a value using a 3-byte length prefix. The maximum supported column length is 16,777,215 (2<sup>24</sup> − 1) characters.
-* **LONGTEXT** — store a value using a 4-byte length prefix. The maximum supported column length is 4,294,967,295 or 4GB (2<sup>32</sup> − 1) characters.
+- **INT(M)** or **INTEGER(M)**: Normal integer.  
+  - Range: -2,147,483,648 to 2,147,483,647.  
+  - **UNSIGNED**: Range: 0 to 4,294,967,295.
 
-> [!NOTE] 
-> Again, the length cap will also depend on your configured maximum packet size in the client/server protocol and available memory. 
+- **BIGINT(M)**: Largest integer.  
+  - Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807.  
+  - **UNSIGNED**: Range: 0 to 18,446,744,073,709,551,615.
 
-##### **Text Storage Formats**
-* **CHAR** — specifies the max number of non-binary characters you can store. The range is from 0 to 255.
-* **VARCHAR** — store variable-length non-binary strings. The maximum number of characters you can store is 65,535 (equal to the max row size).
-    * VARCHAR values are stored as a 1-byte or 2-byte length prefix plus data, unlike CHAR values.
-* **BYNARY** — store binary data in the form of byte strings. Similar to CHAR.
-* **VARBYNARY** — store binary data of variable length in the form of byte strings. Similar to VARCHAR.
-* **ENUM** — store permitted text values that you enumerated in the column specification whenCHAR — specifies the max number of non-binary characters you can store. The range is from 0 to 255.
-    * ENUM columns can contain a maximum of 65,535 distinct elements and have > 255 unique element list definitions among its ENUM.
-* **SET** — another way to store several text values that were chosen from a predefined list of values.
-* **ENUM** columns can contain a maximum of 65,535 distinct elements and have > 255 unique element list definitions among its ENUM.
-    * SET — another way to store several text values that were chosen from a predefined list of values.
+### Floating-Point Types
+- **DECIMAL(M, D)**: Stores a double value as a string.  
+  - **M**: Total number of digits (max: 65, default: 10).  
+  - **D**: Number of digits after the decimal point (max: 30, default: 0).
 
-##### **Date and Time Data Types**
-As the name implies, this data type lets you store the time data in different formats.
-* **DATE** — use it for values with a date part only. MySQL displays DATE values in the ‘YYYY-MMDD’ format.
-    * Supported data range is ‘1000-01-01’ to ‘9999-12-31’.
-* **DATETIME** — record values that have both date and time parts. The display format is ‘YYYYMM-DD hh:mm:ss’.
-    * Supported data range is ‘1000-01-01 00:00:00’ to ‘9999-12-31 23:59:59’.
-* **TIMESTAMP** — add more precision to record values that have both date and time parts, up till microseconds in UTC.
-    * Supported data range is ‘1970-01-01 00:00:01’ UTC to ‘2038-01-19 03:14:07’ UTC.
-* **TIME** — record just time values in either ‘hh:mm:ss’ or ‘hhh:mm:ss’ format. The latter can represent elapsed time and time intervals.
-    * Supported data range is ‘-838:59:59’ to ‘838:59:59’.
-* **YEAR** — use this 1-byte type used to store year values.
-    * A 4-digit format displays YEAR values as 0000, with a range between 1901 to 2155.
-    * A 2-digit format displays YEAR values as 00. The accepted range is ‘0’ to ‘99’ and MySQL will convert YEAR values in the ranges 2000 to 2069 and 1970 to 1999
+- **FLOAT(M, D)**: Approximate number with a floating decimal point.  
+  - **Deprecated** since MySQL 8.0.17.  
+  - Range: -3.402823466E+38 to 3.402823466E+38.
 
-#### **Working With Indexes**
-**Indexes** are the core element of your database navigation. Use them to map the different types of
-data in your database, so that you don’t need to parse all the records to find a match.
+---
 
-**NB**: You have to update an index every time you are creating, changing or deleting a record in the
-table. Thus, it’s best to create indexes only when you need to and for frequently searched columns.
+## BLOB and TEXT Data Types
 
-##### **How to Create an Index**
-The basic syntax is as follows:
+### BLOB Data Types
+- **TINYBLOB**: Max length: 255 bytes. Stored with a 1-byte length prefix.  
+- **BLOB**: Max length: 65,535 bytes. Stored with a 2-byte length prefix.  
+- **MEDIUMBLOB**: Max length: 16,777,215 bytes. Stored with a 3-byte length prefix.  
+- **LONGBLOB**: Max length: 4,294,967,295 bytes. Stored with a 4-byte length prefix.
+
+### TEXT Data Types
+- **TINYTEXT**: Max length: 255 characters. Stored with a 1-byte length prefix.  
+- **TEXT**: Max length: 65,535 characters. Stored with a 2-byte length prefix.  
+- **MEDIUMTEXT**: Max length: 16,777,215 characters. Stored with a 3-byte length prefix.  
+- **LONGTEXT**: Max length: 4,294,967,295 characters. Stored with a 4-byte length prefix.
+
+> **Note**: Length limitations also depend on packet size and available memory.
+
+### Text Storage Formats
+- **CHAR**: Fixed-length strings (max: 255 characters).  
+- **VARCHAR**: Variable-length strings (max: 65,535 characters).  
+- **BINARY**/**VARBINARY**: Binary equivalents of **CHAR**/**VARCHAR**.  
+- **ENUM**: Predefined list of permitted values (max: 65,535 distinct values).  
+- **SET**: Store multiple predefined text values.
+
+---
+
+## Date and Time Data Types
+- **DATE**: Stores date values (format: `YYYY-MM-DD`).  
+  - Range: `1000-01-01` to `9999-12-31`.
+
+- **DATETIME**: Stores date and time values (format: `YYYY-MM-DD hh:mm:ss`).  
+  - Range: `1000-01-01 00:00:00` to `9999-12-31 23:59:59`.
+
+- **TIMESTAMP**: UTC-based date and time values (up to microseconds).  
+  - Range: `1970-01-01 00:00:01` UTC to `2038-01-19 03:14:07` UTC.
+
+- **TIME**: Time values (formats: `hh:mm:ss` or `hhh:mm:ss`).  
+  - Range: `-838:59:59` to `838:59:59`.
+
+- **YEAR**: Year values in 2-digit or 4-digit formats.  
+  - Range: `1901` to `2155` (4-digit).  
+  - Range: `0` to `99` (2-digit, auto-converted by MySQL).
+
+```markdown
+
+---
+
+## Working With Indexes
+
+### What are Indexes?
+**Indexes** are a crucial element for efficient database navigation. They allow you to quickly locate rows in a table without scanning the entire table.  
+
+> **Note:** Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
+
+---
+
+### How to Create an Index
+To create an index on one or more columns, use the following syntax:
 ```
 CREATE INDEX index_name
 ON table_name (column1, column2, ...);
 ```
-You can also create a unique index — one that enforces the uniqueness of values in one or more columns.
 
+#### Create a Unique Index
+A **unique index** ensures that the indexed columns contain only unique values:
 ```
 CREATE UNIQUE INDEX index_name
-ON table_name(index_column_1,index_column_2,...);
+ON table_name (column1, column2, ...);
 ```
 
-##### **How to Delete an Index in MySQL**
-Use the DROP command for that:
+---
+
+### How to Delete an Index
+To delete an index, use the `DROP` command:
 ```
 DROP INDEX index_name;
 ```
 
-#### **Working with Views**
-A **view** is a virtual representation of an actual table that you can assemble up to your liking (before
-adding the actual one to your database).
+---
 
-It features rows and columns, just like the real deal and can contain fields from one or more of the
-real tables from your database. In short, it’s a good way to visualize and review data coming from
-different tables within a single screen.
+## Working With Views
 
-##### **How to Create a New View**
+### What are Views?
+A **view** is a virtual table that represents the result of a SQL query. Views can:
+- Combine data from multiple tables.
+- Simplify complex queries by abstracting them into a single object.
+- Always display up-to-date data since the database engine recreates the view each time it is queried.
+
+---
+
+### How to Create a New View
+To create a view, use the following syntax:
 ```
 CREATE VIEW view_name AS
 SELECT column1, column2, ...
@@ -355,10 +483,10 @@ FROM table_name
 WHERE condition;
 ```
 
-##### **Update a View**
-A view always displays fresh data since the database engine recreates it each time, using the view’s
-SQL statement. To refresh your view use the next code:
+---
 
+### How to Update a View
+A view always reflects the latest data. To refresh or modify a view, use:
 ```
 CREATE OR REPLACE VIEW view_name AS
 SELECT column1, column2, ...
@@ -366,174 +494,270 @@ FROM table_name
 WHERE condition;
 ```
 
-##### **Rename a View**
-If you are dealing with multiple views at a time, it’s best to give them distinctive names. Here’s how
-that done:
+---
 
+### How to Rename a View
+To rename a view for better organization:
 ```
 RENAME TABLE view_name TO new_view_name;
 ```
 
-##### **Show All Views**
-To call up all current views for all tables from the database, use this snippet:
+---
+
+### How to Show All Views
+To list all views in the database:
 ```
 SHOW FULL TABLES
-WHERE table_type = ‘VIEW’;
+WHERE table_type = 'VIEW';
 ```
 
-##### **Delete a View**
-To delete a single view use the DROP command:
+---
+
+### How to Delete a View
+To delete a single view, use:
 ```
 DROP VIEW [IF EXISTS] view_name;
 ```
-You can also delete multiple views at a time:
-```
-Drop Multiple views: DROP VIEW [IF EXISTS] view1, view2, ...;
-```
 
-#### **Working With Triggers**
-A **trigger** is a database object, associated with a table. It activates whenever a specific event
-happens for the table.
-For example, you can set up triggers for events such as:
-* Row or deletes updates
-* Row information inserts
-This is a more advanced topic, so check the official MySQL trigger FAQ section for more details.
+To delete multiple views at once:
+```
+DROP VIEW [IF EXISTS] view1, view2, ...;
+```
+```markdown
 
-##### **How to Create a Trigger**
-To create a simple trigger that will pop up before or after a certain operation such as INSERT,
-UPDATE or DELETE, use this code:
+## Working With Triggers
+
+### What are Triggers?
+A **trigger** is a database object associated with a table that activates when specific events (e.g., row inserts, updates, or deletions) occur.
+
+> **Example Use Cases:**
+> - Automatically update a timestamp column on data modification.
+> - Enforce complex business rules at the database level.
+
+---
+
+### How to Create a Trigger
+To create a trigger that runs **BEFORE** or **AFTER** an event like `INSERT`, `UPDATE`, or `DELETE`, use:
 ```
 CREATE TRIGGER trigger_name
-{BEFORE | AFTER} {INSERT | UPDATE| DELETE }
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
 ON table_name FOR EACH ROW
 trigger_body;
 ```
 
-##### **Review All Triggers in Your Database**
-Search your database for all the active triggers using LIKE and WHERE clauses.
+---
+
+### How to Review Triggers
+You can view all active triggers in your database using the `SHOW TRIGGERS` command:
 ```
 SHOW TRIGGERS
 [{FROM | IN} database_name]
-[LIKE ‘pattern’ | WHERE search_condition];
+[LIKE 'pattern' | WHERE search_condition];
 ```
 
-##### **How to Delete a Trigger**
-To remove a trigger, use the DROP command:
+---
+
+### How to Delete a Trigger
+To remove a trigger:
 ```
 DROP TRIGGER [IF EXISTS] trigger_name;
 ```
 
-#### **Stored Procedures for MySQL**
-**Stored procedures** are reusable SQL code snippets that you can store in your database and useas-needed over and over again. They save you tons of time since you don’t need to write a query
-from scratch. Instead, you just call it to execute it.
+---
 
-##### **How to Create a Stored Procedure in MySQL**
-Here’s how to create a simple stored procedure with no additional parameters:
+## Stored Procedures for MySQL
+
+### What are Stored Procedures?
+**Stored procedures** are reusable SQL snippets stored in your database. They simplify repetitive tasks and improve code reusability.
+
+---
+
+### How to Create a Stored Procedure
+#### Simple Stored Procedure:
 ```
 CREATE PROCEDURE procedure_name
 AS
-sql_statement
-GO;
-```
-And here’s another stored procedure example featuring WHERE clause:
-```
-CREATE PROCEDURE SelectAllMovies @Title varchar(30)
-AS
-SELECT * FROM Movies WHERE Title = @Title
-GO;
+sql_statement;
 ```
 
-##### **Review All Stored Procedures**
-Similarly to triggers, you can review all stored procedures with LIKE and WHERE:
+#### Stored Procedure with Parameters:
+```
+CREATE PROCEDURE SelectAllMovies(IN Title VARCHAR(30))
+BEGIN
+  SELECT * FROM Movies WHERE Title = Title;
+END;
+```
+
+---
+
+### How to Review Stored Procedures
+To list all stored procedures in your database:
 ```
 SHOW PROCEDURE STATUS
-[LIKE ‘pattern’ | WHERE search_condition];
+[LIKE 'pattern' | WHERE search_condition];
 ```
 
-##### **How to Delete a Stored Procedure**
-To get rid of a stored procedure you no longer need, use DROP:
+---
+
+### How to Delete a Stored Procedure
+To delete a stored procedure:
 ```
 DROP PROCEDURE [IF EXISTS] procedure_name;
 ```
 
-#### **Logical Operators**
-**Logical operators** enable you to add more than one condition in WHERE clause. This makes them
-super handy for more advanced search, update, insert and delete queries.
-In MySQL you have three main logical operators:
-* AND — use it to filter records that rely on 1+ condition. This way you can call records that satisfy all the conditions separated by AND.
-* OR — call records that meet any of the conditions separated by OR.
-* NOT — review records that do not meet a certain condition (e.g. NOT blue). It’s a handy operator from excluding certain data.
+---
 
-Plus, some additional special operators:
-* BETWEEN — select or search data between a range of set min and max values.
-* LIKE — compare one record to another. Handy operator for search.
-* IS NULL — compare some value with a NULL value.
-* IN — determine if a value or expression matches one of the values on your list.
-* ALL — compare a value or expression to all other values in a list.
-* ANY — compare a value or expression to any value in your list according to the specified condition.
-* EXISTS — test if a certain record exists.
+## Logical Operators
 
-#### **Aggregate Functions**
-**Aggregate functions** in MySQL allow you to run a calculation on a set of values and return a single
-scalar value. In essence, they are a great way to find the needed data faster and organize it better
-using **GROUP BY** and **HAVING** clauses of the **SELECT** statement.
-Below is an overview of these:
+### Overview of Logical Operators
+Logical operators help you combine conditions in `WHERE` clauses for advanced queries:
+- **`AND`**: Select records that meet all specified conditions.
+- **`OR`**: Select records that meet at least one condition.
+- **`NOT`**: Exclude records that meet a specific condition.
 
-##### **MIN**
-Find the smallest value of the selected column in your table:
+---
+
+### Special Operators
+- **`BETWEEN`**: Select records within a range.
+  ```
+  SELECT * FROM table_name WHERE column_name BETWEEN value1 AND value2;
+  ```
+- **`LIKE`**: Search for patterns in text.
+  ```
+  SELECT * FROM table_name WHERE column_name LIKE 'pattern%';
+  ```
+- **`IS NULL`**: Find records with `NULL` values.
+  ```
+  SELECT * FROM table_name WHERE column_name IS NULL;
+  ```
+- **`IN`**: Check if a value matches any value in a list.
+  ```
+  SELECT * FROM table_name WHERE column_name IN (value1, value2, ...);
+  ```
+- **`ALL`**: Compare a value to all values in a list.
+  ```
+  SELECT * FROM table_name WHERE column_name > ALL (subquery);
+  ```
+- **`ANY`**: Compare a value to any value in a list.
+  ```
+  SELECT * FROM table_name WHERE column_name > ANY (subquery);
+  ```
+- **`EXISTS`**: Check if a subquery returns any rows.
+  ```
+  SELECT * FROM table_name WHERE EXISTS (subquery);
+  ```
+
+```markdown
+
+---
+
+## Aggregate Functions
+
+### Overview
+**Aggregate functions** perform calculations on a set of values and return a single result. They are often used with **GROUP BY** and **HAVING** clauses to organize data.
+
+---
+
+### MIN Function
+Returns the smallest value in a column:
 ```
-SELECT MIN (column_name)
+SELECT MIN(column_name)
 FROM table_name
 WHERE condition;
 ```
 
-##### **MAX**
-Does the opposite and returns the largest value of the selected column:
+---
+
+### MAX Function
+Returns the largest value in a column:
 ```
-SELECT MAX (column_name)
+SELECT MAX(column_name)
 FROM table_name
 WHERE condition;
 ```
 
-##### **COUNT**
-Call up several rows that meet the specified criteria:
+---
+
+### COUNT Function
+Counts the number of rows that match a specified condition:
 ```
-SELECT COUNT (column_name)
+SELECT COUNT(column_name)
 FROM table_name
 WHERE condition;
 ```
 
-##### **AVG**
-Get the average value of a numeric column that you selected:
+---
+
+### AVG Function
+Calculates the average value of a numeric column:
 ```
-SELECT AVG (column_name)
+SELECT AVG(column_name)
 FROM table_name
 WHERE condition;
 ```
 
-##### **SUM**
-Receive a total sum of a numeric column that you selected:
+---
+
+### SUM Function
+Calculates the total sum of a numeric column:
 ```
 SELECT SUM(column_name)
 FROM table_name
 WHERE condition;
 ```
 
-#### **SQL Database Backup Commands**
-Finally, don’t forget to regularly backup your progress as you are testing different commands and
-code snippets.
-There are several easy ways to do it. To backup your database to SQL file, use this code:
+---
+
+## SQL Database Backup and Restore Commands
+
+### Backup Commands
+To create a backup of your database:
 ```
 mysqldump -u Username -p dbNameYouWant > databasename_backup.sql
 ```
-Then, to restore your work from a SQL backup, run the following line:
-```
-mysql - u Username -p dbNameYouWant < databasename_backup.sql
 
+---
+
+### Restore Commands
+To restore a database from a backup file:
+```
+mysql -u Username -p dbNameYouWant < databasename_backup.sql
 ```
 
-#### **SQL import Command**
-To import the database, you can run the following command:
+---
+
+### Import Database Command
+To import an existing SQL file into your database:
 ```
 SOURCE C:\Users\UserName\Downloads\dbName.sql
 ```
+
+---
+
+## Additional MySQL Commands
+
+### Viewing Tables
+Show all tables in the current database:
+```
+SHOW TABLES;
+```
+
+### Viewing Columns
+Show column details for a specific table:
+```
+DESCRIBE table_name;
+```
+
+### Viewing Indexes
+Display all indexes of a table:
+```
+SHOW INDEX FROM table_name;
+```
+
+### Display Current Database
+Check the name of the currently selected database:
+```
+SELECT DATABASE();
+```
+
+This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables.
