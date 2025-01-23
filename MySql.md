@@ -91,7 +91,9 @@
 27. [Example Dataset](#example-dataset)
 28. [Example Query](#example-query)
 29. [Use Cases](#use-cases)
-
+30. [WITH Clause](#with-clause)
+   - [Syntax](#with-syntax)
+   - [Examples](#with-examples)
 
 ## Getting Started
 You can write two types of comments in MySQL:
@@ -890,5 +892,61 @@ FROM employees;
 2. **Calculate cumulative sales for a specific product.**
 3. **Identify top `N` performing employees in each region.**
 4. **Compute running totals or averages over time.**
+
+Sure! Here's an updated `.md` file with an explanation of the `WITH` clause (Common Table Expression, or CTE) and examples added to complement the window functions content:
+
+```markdown
+# SQL Window Functions and WITH Clause
+
+Window functions in SQL are used to perform calculations across a set of table rows related to the current row, while the `WITH` clause (also known as Common Table Expression or CTE) simplifies queries by creating temporary result sets that can be referenced within a single query.
+
+## 1. WITH Clause
+
+The `WITH` clause allows you to create temporary result sets that can be used by the main query. This is particularly helpful when you need to break down complex queries into smaller, more manageable steps.
+
+### 1.1 Syntax
+```sql
+WITH cte_name AS (
+    SELECT column1, column2
+    FROM table_name
+    WHERE condition
+)
+SELECT *
+FROM cte_name;
+```
+
+### 1.2 Examples
+
+#### Example 1: Ranking Employees with Window Functions
+Use the `WITH` clause to rank employees by salary in their departments.
+
+```sql
+WITH RankedEmployees AS (
+    SELECT 
+        employee_id,
+        department_id,
+        salary,
+        ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS rank
+    FROM employees
+)
+SELECT *
+FROM RankedEmployees
+WHERE rank = 1;
+```
+
+This query retrieves the top-paid employee in each department.
+#### Example 2: Using CTE for Cumulative Sales
+```sql
+WITH CumulativeSales AS (
+    SELECT 
+        product_id,
+        sale_date,
+        SUM(sale_amount) OVER (PARTITION BY product_id ORDER BY sale_date) AS cumulative_sales
+    FROM sales
+)
+SELECT *
+FROM CumulativeSales
+WHERE cumulative_sales > 10000;
+```
 
 This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables.
