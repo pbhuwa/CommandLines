@@ -71,8 +71,15 @@
    - [Restore Commands](#restore-commands)  
    - [Import Database Command](#import-database-command)  
 20. [Additional MySQL Commands](#additional-mysql-commands)  
-
----
+21 [Introduction to Joins](#introduction-to-joins)
+22 [Types of Joins](#types-of-joins)
+  - [Inner Join](#inner-join)
+  - [Left Join (Left Outer Join)](#left-join-left-outer-join)
+  - [Right Join (Right Outer Join)](#right-join-right-outer-join)
+  - [Full Join (Full Outer Join)](#full-join-full-outer-join)
+  - [Cross Join](#cross-join)
+  - [Self Join](#self-join)
+23 [Best Practices](#best-practices)
 
 ## Getting Started
 You can write two types of comments in MySQL:
@@ -95,16 +102,12 @@ in the Movies table: */
 SELECT * FROM Movies;
 ```
 
----
-
 ## How to Connect to MySQL
 To start working with MySQL, you’ll need to establish an active SSH session on your server.
 ```
 mysql -u root -p
 ```
 If you didn’t set a password for your MySQL root user, you omit the `-p` switch.
-
----
 
 ## Create a New MySQL User Account
 Next, you can create a new test user for practice. To do that, run the following command:
@@ -116,8 +119,6 @@ If you need to delete a user later on you, use this command:
 ```
 DROP USER ‘someuser’@’localhost’;
 ```
-
----
 
 ## Create a New Database
 To set up a new database, use this line:
@@ -135,8 +136,6 @@ Later on, you can quickly navigate to a particular database using this command:
 mysql -u root -p mydatabase < DbName.sql
 ```
 
----
-
 ## Delete a MySQL Database
 To get rid of a database, just type:
 ```
@@ -144,8 +143,6 @@ DROP DATABASE dbName;
 ```
 
 If you are done for the day, just type “exit” in the command line to finish your session.
-
----
 
 ## Essential MySQL Commands
 - **SELECT** — choose specific data from your database
@@ -159,8 +156,6 @@ If you are done for the day, just type “exit” in the command line to finish 
 - **DROP TABLE** — delete a table
 - **CREATE INDEX** — create an index (search key for all the info stored)
 - **DROP INDEX** — delete an index
-
----
 
 ## Working with Tables
 Tables are the key element of MySQL databases as they let you store all the information together in organized rows. Each row consists of columns that feature a specified data type. You have plenty of options for customization using the commands below.
@@ -337,8 +332,6 @@ MySQL has three main categories of data types:
 - **Text**
 - **Date/Time**
 
----
-
 ## Numeric Data Types
 
 ### BIT
@@ -381,8 +374,6 @@ MySQL has three main categories of data types:
   - **Deprecated** since MySQL 8.0.17.  
   - Range: -3.402823466E+38 to 3.402823466E+38.
 
----
-
 ## BLOB and TEXT Data Types
 
 ### BLOB Data Types
@@ -407,8 +398,6 @@ MySQL has three main categories of data types:
 - **ENUM**: Predefined list of permitted values (max: 65,535 distinct values).  
 - **SET**: Store multiple predefined text values.
 
----
-
 ## Date and Time Data Types
 - **DATE**: Stores date values (format: `YYYY-MM-DD`).  
   - Range: `1000-01-01` to `9999-12-31`.
@@ -425,7 +414,6 @@ MySQL has three main categories of data types:
 - **YEAR**: Year values in 2-digit or 4-digit formats.  
   - Range: `1901` to `2155` (4-digit).  
   - Range: `0` to `99` (2-digit, auto-converted by MySQL).
----
 
 ## Working With Indexes
 
@@ -434,8 +422,6 @@ MySQL has three main categories of data types:
 
 > [!NOTE] 
 > Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
-
----
 
 ### How to Create an Index
 To create an index on one or more columns, use the following syntax:
@@ -451,15 +437,11 @@ CREATE UNIQUE INDEX index_name
 ON table_name (column1, column2, ...);
 ```
 
----
-
 ### How to Delete an Index
 To delete an index, use the `DROP` command:
 ```
 DROP INDEX index_name;
 ```
-
----
 
 ## Working With Views
 
@@ -468,8 +450,6 @@ A **view** is a virtual table that represents the result of a SQL query. Views c
 - Combine data from multiple tables.
 - Simplify complex queries by abstracting them into a single object.
 - Always display up-to-date data since the database engine recreates the view each time it is queried.
-
----
 
 ### How to Create a New View
 To create a view, use the following syntax:
@@ -480,8 +460,6 @@ FROM table_name
 WHERE condition;
 ```
 
----
-
 ### How to Update a View
 A view always reflects the latest data. To refresh or modify a view, use:
 ```
@@ -491,15 +469,11 @@ FROM table_name
 WHERE condition;
 ```
 
----
-
 ### How to Rename a View
 To rename a view for better organization:
 ```
 RENAME TABLE view_name TO new_view_name;
 ```
-
----
 
 ### How to Show All Views
 To list all views in the database:
@@ -507,8 +481,6 @@ To list all views in the database:
 SHOW FULL TABLES
 WHERE table_type = 'VIEW';
 ```
-
----
 
 ### How to Delete a View
 To delete a single view, use:
@@ -530,8 +502,6 @@ A **trigger** is a database object associated with a table that activates when s
 > - Automatically update a timestamp column on data modification.
 > - Enforce complex business rules at the database level.
 
----
-
 ### How to Create a Trigger
 To create a trigger that runs **BEFORE** or **AFTER** an event like `INSERT`, `UPDATE`, or `DELETE`, use:
 ```
@@ -541,8 +511,6 @@ ON table_name FOR EACH ROW
 trigger_body;
 ```
 
----
-
 ### How to Review Triggers
 You can view all active triggers in your database using the `SHOW TRIGGERS` command:
 ```
@@ -551,22 +519,16 @@ SHOW TRIGGERS
 [LIKE 'pattern' | WHERE search_condition];
 ```
 
----
-
 ### How to Delete a Trigger
 To remove a trigger:
 ```
 DROP TRIGGER [IF EXISTS] trigger_name;
 ```
 
----
-
 ## Stored Procedures for MySQL
 
 ### What are Stored Procedures?
 **Stored procedures** are reusable SQL snippets stored in your database. They simplify repetitive tasks and improve code reusability.
-
----
 
 ### How to Create a Stored Procedure
 #### Simple Stored Procedure:
@@ -584,8 +546,6 @@ BEGIN
 END;
 ```
 
----
-
 ### How to Review Stored Procedures
 To list all stored procedures in your database:
 ```
@@ -593,15 +553,11 @@ SHOW PROCEDURE STATUS
 [LIKE 'pattern' | WHERE search_condition];
 ```
 
----
-
 ### How to Delete a Stored Procedure
 To delete a stored procedure:
 ```
 DROP PROCEDURE [IF EXISTS] procedure_name;
 ```
-
----
 
 ## Logical Operators
 
@@ -610,8 +566,6 @@ Logical operators help you combine conditions in `WHERE` clauses for advanced qu
 - **`AND`**: Select records that meet all specified conditions.
 - **`OR`**: Select records that meet at least one condition.
 - **`NOT`**: Exclude records that meet a specific condition.
-
----
 
 ### Special Operators
 - **`BETWEEN`**: Select records within a range.
@@ -643,14 +597,10 @@ Logical operators help you combine conditions in `WHERE` clauses for advanced qu
   SELECT * FROM table_name WHERE EXISTS (subquery);
   ```
 
----
-
 ## Aggregate Functions
 
 ### Overview
 **Aggregate functions** perform calculations on a set of values and return a single result. They are often used with **GROUP BY** and **HAVING** clauses to organize data.
-
----
 
 ### MIN Function
 Returns the smallest value in a column:
@@ -660,8 +610,6 @@ FROM table_name
 WHERE condition;
 ```
 
----
-
 ### MAX Function
 Returns the largest value in a column:
 ```
@@ -669,8 +617,6 @@ SELECT MAX(column_name)
 FROM table_name
 WHERE condition;
 ```
-
----
 
 ### COUNT Function
 Counts the number of rows that match a specified condition:
@@ -680,8 +626,6 @@ FROM table_name
 WHERE condition;
 ```
 
----
-
 ### AVG Function
 Calculates the average value of a numeric column:
 ```
@@ -689,8 +633,6 @@ SELECT AVG(column_name)
 FROM table_name
 WHERE condition;
 ```
-
----
 
 ### SUM Function
 Calculates the total sum of a numeric column:
@@ -700,8 +642,6 @@ FROM table_name
 WHERE condition;
 ```
 
----
-
 ## SQL Database Backup and Restore Commands
 
 ### Backup Commands
@@ -710,23 +650,17 @@ To create a backup of your database:
 mysqldump -u Username -p dbNameYouWant > databasename_backup.sql
 ```
 
----
-
 ### Restore Commands
 To restore a database from a backup file:
 ```
 mysql -u Username -p dbNameYouWant < databasename_backup.sql
 ```
 
----
-
 ### Import Database Command
 To import an existing SQL file into your database:
 ```
 SOURCE C:\Users\UserName\Downloads\dbName.sql
 ```
-
----
 
 ## Additional MySQL Commands
 
@@ -753,5 +687,82 @@ Check the name of the currently selected database:
 ```
 SELECT DATABASE();
 ```
+
+## Introduction to Joins
+
+SQL joins are used to combine rows from two or more tables based on a related column. They allow you to retrieve data that is spread across multiple tables in a relational database.
+
+## Types of Joins
+
+### Inner Join
+
+An **Inner Join** returns records that have matching values in both tables.
+
+```sql
+SELECT *
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+```
+
+### Left Join (Left Outer Join)
+
+A **Left Join** returns all records from the left table and the matched records from the right table. Unmatched records will have `NULL` values for columns from the right table.
+
+```sql
+SELECT *
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+```
+
+### Right Join (Right Outer Join)
+
+A **Right Join** returns all records from the right table and the matched records from the left table. Unmatched records will have `NULL` values for columns from the left table.
+
+```sql
+SELECT *
+FROM table1
+RIGHT JOIN table2
+ON table1.common_column = table2.common_column;
+```
+
+### Full Join (Full Outer Join)
+
+A **Full Join** returns all records when there is a match in either table. Records with no match in one table will show `NULL` values for the other table.
+
+```sql
+SELECT *
+FROM table1
+FULL OUTER JOIN table2
+ON table1.common_column = table2.common_column;
+```
+
+### Cross Join
+
+A **Cross Join** returns the Cartesian product of the two tables. Each row in the first table is combined with every row in the second table.
+
+```sql
+SELECT *
+FROM table1
+CROSS JOIN table2;
+```
+
+### Self Join
+
+A **Self Join** is a join where a table is joined with itself.
+
+```sql
+SELECT A.column1, B.column2
+FROM table_name A, table_name B
+WHERE A.common_column = B.common_column;
+```
+
+## Best Practices
+
+- Use appropriate join types for your use case.
+- Avoid unnecessary joins as they can degrade performance.
+- Use `ON` conditions carefully to prevent Cartesian products.
+- Index the columns used in joins for better performance.
 
 This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables.
