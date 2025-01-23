@@ -397,7 +397,8 @@ MySQL has three main categories of data types:
 - **MEDIUMTEXT**: Max length: 16,777,215 characters. Stored with a 3-byte length prefix.  
 - **LONGTEXT**: Max length: 4,294,967,295 characters. Stored with a 4-byte length prefix.
 
-> **Note**: Length limitations also depend on packet size and available memory.
+> [!NOTE] 
+> Length limitations also depend on packet size and available memory.
 
 ### Text Storage Formats
 - **CHAR**: Fixed-length strings (max: 255 characters).  
@@ -431,7 +432,8 @@ MySQL has three main categories of data types:
 ### What are Indexes?
 **Indexes** are a crucial element for efficient database navigation. They allow you to quickly locate rows in a table without scanning the entire table.  
 
-> [!NOTE] Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
+> [!NOTE] 
+> Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
 
 ---
 
