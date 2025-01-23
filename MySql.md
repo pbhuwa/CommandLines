@@ -785,11 +785,11 @@ Here's the `.md` file with a Table of Contents (TOC):
 
 Window functions in SQL are used to perform calculations across a set of table rows related to the current row. These functions are commonly used in scenarios like ranking, running totals, and moving averages.
 
-## 1. Key Features
+## Key Features
 - **Operate over a subset of rows:** They perform calculations over a window (subset) of rows defined by the `OVER` clause.
 - **Do not collapse rows:** Unlike aggregate functions, window functions do not reduce the result set; each row remains in the output.
 
-## 2. Syntax
+##  Syntax
 ```sql
 function_name (arguments) OVER (
   [PARTITION BY column_name]
@@ -802,9 +802,9 @@ function_name (arguments) OVER (
 2. **`PARTITION BY`**: Divides rows into groups (optional).
 3. **`ORDER BY`**: Defines the order of rows within the window.
 
-## 3. Common Window Functions
+## Common Window Functions
 
-### 3.1 ROW_NUMBER()
+### ROW_NUMBER()
 Assigns a unique number to each row within a partition, starting from 1.
 
 ```sql
@@ -815,7 +815,7 @@ SELECT
 FROM employees;
 ```
 
-### 3.2 RANK()
+### RANK()
 Gives a ranking to rows, but skips ranks if there are ties.
 
 ```sql
@@ -826,7 +826,7 @@ SELECT
 FROM employees;
 ```
 
-### 3.3 DENSE_RANK()
+### DENSE_RANK()
 Similar to `RANK()`, but does not skip ranks if there are ties.
 
 ```sql
@@ -837,7 +837,7 @@ SELECT
 FROM employees;
 ```
 
-### 3.4 NTILE(n)
+### NTILE(n)
 Divides rows into `n` roughly equal parts and assigns a bucket number.
 
 ```sql
@@ -848,7 +848,7 @@ SELECT
 FROM employees;
 ```
 
-### 3.5 Aggregate Functions as Window Functions
+### Aggregate Functions as Window Functions
 Aggregate functions like `SUM`, `AVG`, `MAX`, etc., can also be used as window functions.
 
 ```sql
@@ -860,7 +860,7 @@ SELECT
 FROM employees;
 ```
 
-## 4. Example Dataset
+## Example Dataset
 | Employee_ID | Department_ID | Salary |
 |-------------|---------------|--------|
 | 1           | 10            | 1000   |
@@ -868,7 +868,7 @@ FROM employees;
 | 3           | 10            | 1500   |
 | 4           | 20            | 2500   |
 
-## 5. Example Query
+## Example Query
 ```sql
 SELECT 
     employee_id,
@@ -887,7 +887,7 @@ FROM employees;
 | 4           | 20            | 2500   | 1       | 4500         |
 | 2           | 20            | 2000   | 2       | 4500         |
 
-## 6. Use Cases
+## Use Cases
 1. **Rank employees by salary within departments.**
 2. **Calculate cumulative sales for a specific product.**
 3. **Identify top `N` performing employees in each region.**
@@ -900,11 +900,11 @@ Sure! Here's an updated `.md` file with an explanation of the `WITH` clause (Com
 
 Window functions in SQL are used to perform calculations across a set of table rows related to the current row, while the `WITH` clause (also known as Common Table Expression or CTE) simplifies queries by creating temporary result sets that can be referenced within a single query.
 
-## 1. WITH Clause
+## WITH Clause
 
 The `WITH` clause allows you to create temporary result sets that can be used by the main query. This is particularly helpful when you need to break down complex queries into smaller, more manageable steps.
 
-### 1.1 Syntax
+### Syntax
 ```sql
 WITH cte_name AS (
     SELECT column1, column2
@@ -915,7 +915,7 @@ SELECT *
 FROM cte_name;
 ```
 
-### 1.2 Examples
+### Examples
 
 #### Example 1: Ranking Employees with Window Functions
 Use the `WITH` clause to rank employees by salary in their departments.
