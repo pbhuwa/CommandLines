@@ -425,7 +425,6 @@ MySQL has three main categories of data types:
   - Range: `1901` to `2155` (4-digit).  
   - Range: `0` to `99` (2-digit, auto-converted by MySQL).
 
-```
 
 ---
 
@@ -520,7 +519,6 @@ DROP VIEW [IF EXISTS] view_name;
 To delete multiple views at once:
 ```
 DROP VIEW [IF EXISTS] view1, view2, ...;
-```
 ```
 
 ## Working With Triggers
@@ -644,8 +642,6 @@ Logical operators help you combine conditions in `WHERE` clauses for advanced qu
   ```
   SELECT * FROM table_name WHERE EXISTS (subquery);
   ```
-
-```
 
 ---
 
