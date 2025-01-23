@@ -779,7 +779,6 @@ WHERE A.common_column = B.common_column;
 
 Here's the `.md` file with a Table of Contents (TOC):
 
-```markdown
 # SQL Window Functions
 
 Window functions in SQL are used to perform calculations across a set of table rows related to the current row. These functions are commonly used in scenarios like ranking, running totals, and moving averages.
