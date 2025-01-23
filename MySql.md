@@ -424,8 +424,6 @@ MySQL has three main categories of data types:
 - **YEAR**: Year values in 2-digit or 4-digit formats.  
   - Range: `1901` to `2155` (4-digit).  
   - Range: `0` to `99` (2-digit, auto-converted by MySQL).
-
-
 ---
 
 ## Working With Indexes
@@ -433,7 +431,7 @@ MySQL has three main categories of data types:
 ### What are Indexes?
 **Indexes** are a crucial element for efficient database navigation. They allow you to quickly locate rows in a table without scanning the entire table.  
 
-> **Note:** Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
+> [!NOTE] Indexes require updates whenever records in the table are created, modified, or deleted. Therefore, use indexes sparingly and only for columns that are frequently queried.
 
 ---
 
