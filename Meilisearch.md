@@ -79,8 +79,6 @@ curl.exe -X POST "http://62.72.42.205:7700/" \
     }'
 ```
 
----
-
 ## MeiliSearch Commands
 
 ### 1. Check Indexes
@@ -113,8 +111,6 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 curl -H "Authorization: Bearer <YOUR_API_KEY>" http://62.72.42.205:7700/tasks
 ```
-
----
 
 ## Laravel Integration
 
@@ -167,8 +163,6 @@ $index->updateSettings([
     'sortableAttributes' => ['price', 'created_at'],
 ]);
 ```
-
----
 
 ## References
 - [MeiliSearch Documentation](https://docs.meilisearch.com)
