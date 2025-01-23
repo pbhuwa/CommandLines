@@ -80,6 +80,18 @@
   - [Cross Join](#cross-join)
   - [Self Join](#self-join)
 23 [Best Practices](#best-practices)
+24. [Key Features](#key-features)
+25. [Syntax](#syntax)
+26. [Common Window Functions](#common-window-functions)  
+   - [ROW_NUMBER()](#1-row_number)  
+   - [RANK()](#2-rank)  
+   - [DENSE_RANK()](#3-dense_rank)  
+   - [NTILE()](#4-ntile)  
+   - [Aggregate Functions](#5-aggregate-functions-as-window-functions)
+27. [Example Dataset](#example-dataset)
+28. [Example Query](#example-query)
+29. [Use Cases](#use-cases)
+
 
 ## Getting Started
 You can write two types of comments in MySQL:
@@ -764,5 +776,120 @@ WHERE A.common_column = B.common_column;
 - Avoid unnecessary joins as they can degrade performance.
 - Use `ON` conditions carefully to prevent Cartesian products.
 - Index the columns used in joins for better performance.
+
+Here's the `.md` file with a Table of Contents (TOC):
+
+```markdown
+# SQL Window Functions
+
+Window functions in SQL are used to perform calculations across a set of table rows related to the current row. These functions are commonly used in scenarios like ranking, running totals, and moving averages.
+
+## 1. Key Features
+- **Operate over a subset of rows:** They perform calculations over a window (subset) of rows defined by the `OVER` clause.
+- **Do not collapse rows:** Unlike aggregate functions, window functions do not reduce the result set; each row remains in the output.
+
+## 2. Syntax
+```sql
+function_name (arguments) OVER (
+  [PARTITION BY column_name]
+  [ORDER BY column_name]
+)
+```
+
+### Components:
+1. **`function_name`**: The window function to apply (e.g., `ROW_NUMBER`, `RANK`, `SUM`).
+2. **`PARTITION BY`**: Divides rows into groups (optional).
+3. **`ORDER BY`**: Defines the order of rows within the window.
+
+## 3. Common Window Functions
+
+### 3.1 ROW_NUMBER()
+Assigns a unique number to each row within a partition, starting from 1.
+
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS row_num
+FROM employees;
+```
+
+### 3.2 RANK()
+Gives a ranking to rows, but skips ranks if there are ties.
+
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS rank
+FROM employees;
+```
+
+### 3.3 DENSE_RANK()
+Similar to `RANK()`, but does not skip ranks if there are ties.
+
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    DENSE_RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS dense_rank
+FROM employees;
+```
+
+### 3.4 NTILE(n)
+Divides rows into `n` roughly equal parts and assigns a bucket number.
+
+```sql
+SELECT 
+    employee_id,
+    salary,
+    NTILE(4) OVER (ORDER BY salary DESC) AS quartile
+FROM employees;
+```
+
+### 3.5 Aggregate Functions as Window Functions
+Aggregate functions like `SUM`, `AVG`, `MAX`, etc., can also be used as window functions.
+
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    salary,
+    SUM(salary) OVER (PARTITION BY department_id) AS total_department_salary
+FROM employees;
+```
+
+## 4. Example Dataset
+| Employee_ID | Department_ID | Salary |
+|-------------|---------------|--------|
+| 1           | 10            | 1000   |
+| 2           | 20            | 2000   |
+| 3           | 10            | 1500   |
+| 4           | 20            | 2500   |
+
+## 5. Example Query
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    salary,
+    ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) AS row_num,
+    SUM(salary) OVER (PARTITION BY department_id) AS total_salary
+FROM employees;
+```
+
+### Result:
+| Employee_ID | Department_ID | Salary | Row_Num | Total_Salary |
+|-------------|---------------|--------|---------|--------------|
+| 3           | 10            | 1500   | 1       | 2500         |
+| 1           | 10            | 1000   | 2       | 2500         |
+| 4           | 20            | 2500   | 1       | 4500         |
+| 2           | 20            | 2000   | 2       | 4500         |
+
+## 6. Use Cases
+1. **Rank employees by salary within departments.**
+2. **Calculate cumulative sales for a specific product.**
+3. **Identify top `N` performing employees in each region.**
+4. **Compute running totals or averages over time.**
 
 This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables.
