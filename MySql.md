@@ -195,9 +195,7 @@ To get rid of the table, specify the table name in the following command:
 ```
 DROP TABLE tablename;
 ```
-```
 
-```markdown
 ## Working With Table Columns
 Use columns to store alike information that shares the same attribute (e.g., movie director names).  
 Columns are defined by different storage types:
@@ -427,7 +425,7 @@ MySQL has three main categories of data types:
   - Range: `1901` to `2155` (4-digit).  
   - Range: `0` to `99` (2-digit, auto-converted by MySQL).
 
-```markdown
+```
 
 ---
 
@@ -523,7 +521,7 @@ To delete multiple views at once:
 ```
 DROP VIEW [IF EXISTS] view1, view2, ...;
 ```
-```markdown
+```
 
 ## Working With Triggers
 
@@ -647,7 +645,7 @@ Logical operators help you combine conditions in `WHERE` clauses for advanced qu
   SELECT * FROM table_name WHERE EXISTS (subquery);
   ```
 
-```markdown
+```
 
 ---
 
