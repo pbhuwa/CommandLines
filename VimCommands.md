@@ -10,10 +10,7 @@ This document provides a list of essential Vim commands with explanations and ex
 5. [File Operations](#file-operations)
 6. [Miscellaneous Commands](#miscellaneous-commands)
 
----
-
 ## 1. Basic Vim Commands
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `vim <file>`    | Open a file with Vim                      | `vim example.txt`                            |
@@ -24,10 +21,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `:x`            | Save and quit (same as `:wq`)              |                                              |
 | `ZZ`            | Save and quit (same as `:wq`)              |                                              |
 
----
-
 ## 2. Navigation Commands
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `h`             | Move cursor left                          |                                              |
@@ -43,10 +37,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `Ctrl + f`      | Scroll one page forward                    |                                              |
 | `Ctrl + b`      | Scroll one page backward                   |                                              |
 
----
-
 ## 3. Editing Commands
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `i`             | Insert before the cursor                  | Switch to insert mode at the current cursor position. |
@@ -62,10 +53,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `u`             | Undo the last change                      |                                          |
 | `Ctrl + r`      | Redo the undone change                    |                                          |
 
----
-
 ## 4. Searching and Replacing
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `/pattern`      | Search for a pattern                      | `/hello` searches for the word "hello".      |
@@ -76,10 +64,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `:s/old/new/g`  | Replace all occurrences of 'old' with 'new' in the current line |                        |
 | `:s/old/new/c`  | Replace with confirmation for each occurrence | `:s/foo/bar/c` asks for confirmation before each replacement. |
 
----
-
 ## 5. File Operations
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `:e <filename>` | Open a file                              | `:e example.txt`                             |
@@ -88,10 +73,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `:sp`           | Split window horizontally                 | Open a new window in a horizontal split.     |
 | `:vsp`          | Split window vertically                   | Open a new window in a vertical split.       |
 
----
-
 ## 6. Miscellaneous Commands
-
 | Command         | Description                               | Example / Usage                              |
 |-----------------|-------------------------------------------|----------------------------------------------|
 | `:set number`   | Show line numbers                         | Display line numbers in the left margin.     |
@@ -100,10 +82,7 @@ This document provides a list of essential Vim commands with explanations and ex
 | `:syntax on`    | Enable syntax highlighting                | Turn on syntax highlighting.                 |
 | `:syntax off`   | Disable syntax highlighting               | Turn off syntax highlighting.                |
 
----
-
 ## Conclusion
-
 This document provides an overview of some of the most common Vim commands. For more advanced functionality, consult the Vim help system by typing `:help` followed by the command you need help with.
 
 Happy editing!
