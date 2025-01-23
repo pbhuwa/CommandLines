@@ -1,4 +1,3 @@
-```markdown
 # MySQL Guide
 
 ## Table of Contents
@@ -71,11 +70,11 @@
    - [Backup Commands](#backup-commands)  
    - [Restore Commands](#restore-commands)  
    - [Import Database Command](#import-database-command)  
-20. [Additional MySQL Commands](#additional-mysql-commands)
+20. [Additional MySQL Commands](#additional-mysql-commands)  
 
 ---
 
-<!-- ## Getting Started
+## Getting Started
 You can write two types of comments in MySQL:
 
 > 💬 **Single-Line Comments:**  
@@ -761,4 +760,4 @@ Check the name of the currently selected database:
 SELECT DATABASE();
 ```
 
-This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables. -->
+This Markdown provides a comprehensive guide to get started with MySQL, including essential commands and operations on databases and tables.
