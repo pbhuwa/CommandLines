@@ -1062,7 +1062,6 @@ FROM employees;
 
 Sure! Here's an updated `.md` file with an explanation of the `WITH` clause (Common Table Expression, or CTE) and examples added to complement the window functions content:
 
-````markdown
 # SQL Window Functions and WITH Clause
 
 Window functions in SQL are used to perform calculations across a set of table rows related to the current row, while the `WITH` clause (also known as Common Table Expression or CTE) simplifies queries by creating temporary result sets that can be referenced within a single query.
@@ -1082,7 +1081,6 @@ WITH cte_name AS (
 SELECT *
 FROM cte_name;
 ```
-````
 
 ### Examples
 
