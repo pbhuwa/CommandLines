@@ -66,3 +66,10 @@ wget -O 'build.zip' 'https://cdn.discordapp.com/attachments/1206908369143603210/
 ```
 mv build build.bak ; unzip build.zip
 ```
+```
+upload_max_filesize = 10M
+post_max_size = 20M
+max_execution_time = 300
+max_input_time = 300
+memory_limit = 256M
+```
