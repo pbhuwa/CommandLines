@@ -168,3 +168,8 @@ $index->updateSettings([
 - [MeiliSearch Documentation](https://docs.meilisearch.com)
 - [MeiliSearch PHP SDK](https://github.com/meilisearch/meilisearch-php)
 
+php artisan scout:import "App\Shop\Products\Product"
+php artisan scout:import "App\Shop\Categories\Category"
+php artisan scout:import "App\Shop\Brands\Brand"
+
+

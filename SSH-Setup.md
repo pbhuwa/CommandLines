@@ -1,6 +1,8 @@
 # SSH Setup
 
 ```
+wget -O /home/apps/SD-Web-Refactored/public/adminer.php https://www.adminer.org/latest.php
+
 vi ~/.ssh/config
 mkdir ~/.ssh/keys/ ; mv ~/Downloads/LightsailDefaultKey-us-west-2.pem ~/.ssh/keys
 ls ~/.ssh/keys/
@@ -52,7 +54,9 @@ rm -rf build.bak build.zip
 - If You upload from local computer
 
 ```
-scp -i "C:\Users\dell\Downloads\LightsailDefaultKey-us-west-2.pem" "C:\Users\dell\Downloads\build.zip" bitnami@44.242.67.85:/home/bitnami/ms-dev/quiz-frontend
+scp -i "C:\Users\dell\Downloads\SmartDoko\LightsailDefaultKey-us-west-2.pem" "C:\Users\dell\Downloads\build.zip" bitnami@44.242.67.85:/home/bitnami/ms-dev/quiz-frontend
+scp -i ~/.ssh/keys/ms_ec2.pem "C:\Users\dell\Downloads\build.zip" ubuntu@34.219.184.223:/home/skincare.ktmlabs.com/quiz-frontend
+scp -i ~/.ssh/keys/ms_ec2.pem "C:\Users\dell\Downloads\build.zip" ubuntu@34.219.184.223:~
 ```
 
 - If you upload from hosted url
@@ -73,3 +77,24 @@ max_execution_time = 300
 max_input_time = 300
 memory_limit = 256M
 ```
+
+# ngrok http 80 --host-header=inventory-management.test
+# /usr/bin/php8.1 /usr/bin/composer update
+
+
+python manage.py shell
+
+<!-- change password -->
+from django.contrib.auth.models import User
+
+user = User.objects.get(username='rabin@ktmlabs.com')
+user.set_password('loc@lP@ssword')
+user.save()
+
+print("Password updated successfully.")
+
+<!-- cache clear -->
+from django.core.cache import cache
+cache.clear()
+
+sudo service supervisor restart
